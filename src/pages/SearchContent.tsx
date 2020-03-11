@@ -23,6 +23,11 @@ const style = {
 
 const SearchContent = props => {
   const artists = props.location.state.details;
+  const isLoading = props.location.state.isLoading;
+
+  if (isLoading) {
+    return <p> {"Loading data..."}</p>;
+  }
 
   return (
     <div style={style.container}>
@@ -42,7 +47,7 @@ const SearchContent = props => {
                     {artist.genres.length > 0 ? (
                       <p
                         style={{ overflow: "hidden", textOverflow: "ellipsis" }}
-                      >{`Genre: ${artist.genres.map(genre => genre)}`}</p>
+                      >{`Genre: ${artist.genres[0]}`}</p>
                     ) : null}
                   </div>
                 </div>

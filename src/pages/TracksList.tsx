@@ -1,5 +1,6 @@
 import React from "react";
-import ReactPlayer from "react-player";
+import BottomBar from "../components/BottomBar";
+
 const style = {
   trackContainer: {
     display: "flex",
@@ -12,22 +13,11 @@ const style = {
     flex: "2 1",
     cursor: "pointer"
   } as React.CSSProperties,
-  songContainer: {
-    position: "absolute",
-    left: 0,
-    bottom: 0,
-    height: "100px",
-    backgroundColor: "gray",
-    width: "100vw"
-  } as React.CSSProperties,
   spacer: {
     margin: "0 1em 0 1em"
   },
   spacerArtist: {
     margin: "0 1em 0 1.6em"
-  },
-  alignRight: {
-    marginLeft: "auto"
   }
 };
 
@@ -75,24 +65,7 @@ const TracksList = props => {
             ))}
         </div>
       </div>
-      {pickedSong ? (
-        <div style={style.songContainer}>
-          <div style={style.trackContainer}>
-            <img src={pickedSong.url} alt="track_avatar" />
-            <div>
-              <h3 style={style.spacer}>{pickedSong.album_name}</h3>
-              <p style={style.spacerArtist}>{pickedSong.artist_name}</p>
-            </div>
-            <div style={style.alignRight}>
-              {pickedSong.audio ? (
-                <ReactPlayer url={pickedSong.audio} controls height={60} />
-              ) : (
-                "We are truly sorry, We dont have DEMO recorded yet"
-              )}
-            </div>
-          </div>
-        </div>
-      ) : null}
+      {pickedSong && <BottomBar pickedSong={pickedSong} />}
     </div>
   );
 };

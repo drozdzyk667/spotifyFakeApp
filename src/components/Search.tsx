@@ -12,12 +12,15 @@ const style = {
 
 const Search = () => {
   const [searchValue, setSearchValue] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
 
   const history = useHistory();
   const pushSearchData = async () => {
+    setIsLoading(true);
     await fetch(
       `https://api.spotify.com/v1/search?q=${searchValue}&type=artist`,
       {
@@ -33,8 +36,9 @@ const Search = () => {
       .then(data => {
         history.push({
           pathname: `/search/${searchValue}`,
-          state: { details: data ? data.artists.items : [] }
+          state: { details: data ? data.artists.items : [], isLoading }
         });
+        setIsLoading(false);
       })
       .catch(error => {
         console.warn(error);

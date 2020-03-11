@@ -7,6 +7,7 @@ import SearchContent from "../pages/SearchContent";
 import CategoryPlaylist from "../pages/CategoryPlaylist";
 import Trackslist from "../pages/TracksList";
 import UserProfile from "../pages/UserProfile";
+import AlbumTracks from "../pages/AlbumTracks";
 
 const Routes = () => {
   return (
@@ -20,6 +21,7 @@ const Routes = () => {
         component={Trackslist}
       />
       <Route exact path="/new-releases" component={NewReleases} />
+      <Route exact path="/new-releases/:album" component={AlbumTracks} />
       <Route exact path="/search/:key" component={SearchContent} />
       <Route exact path="/user" component={UserProfile} />
       <Route path="*" component={NotFoundPage} />

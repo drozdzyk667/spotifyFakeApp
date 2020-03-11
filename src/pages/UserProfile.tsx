@@ -31,7 +31,6 @@ const UserProfile = () => {
       })
       .then(data => {
         setCapturedData(data);
-        console.log(data);
         setIsLoading(false);
       })
       .catch(error => {

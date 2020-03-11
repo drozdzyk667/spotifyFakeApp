@@ -47,7 +47,7 @@ const Navigation: React.FC<{}> = () => {
               {"Categories"}
             </Link>
             <Link style={style.link} to="/new-releases">
-              {"New Relases"}
+              {"New Releases"}
             </Link>
           </menu>
           <main style={style.content}>

@@ -8,7 +8,7 @@ const style = {
     padding: "1em"
   } as React.CSSProperties,
   songContainer: {
-    position: "absolute",
+    position: "fixed",
     left: 0,
     bottom: 0,
     height: "100px",
@@ -24,7 +24,8 @@ const style = {
     color: "white"
   },
   alignRight: {
-    marginLeft: "auto"
+    marginLeft: "auto",
+    paddingRight: "20px"
   }
 };
 

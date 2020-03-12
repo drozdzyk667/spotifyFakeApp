@@ -16,6 +16,8 @@ interface FetchData {
   email: string;
   display_name: string;
   images: [{ [key: string]: string }];
+  external_urls: { spotify: string };
+  type: string;
 }
 
 interface Error {
@@ -60,16 +62,33 @@ const UserProfile = () => {
 
   return (
     <div style={style.container}>
-      <div>
+      {capturedData?.images[0]?.url ? (
         <img
           style={{ borderRadius: "50%" }}
-          src={capturedData?.images[0].url}
+          src={capturedData.images[0].url}
           alt="user_photo"
         />
-      </div>
+      ) : null}
       <div style={style.spacer}>
-        <h2>{capturedData?.display_name.slice(0, 5)}</h2>
-        <h4>{capturedData?.email}</h4>
+        <h1>{`Hey ${capturedData?.display_name}, you have ${capturedData?.type} rights !`}</h1>
+        <h4>
+          {`User email: ${capturedData?.email ??
+            "You haven't provided any :("}`}
+        </h4>
+        <div style={{ paddingTop: "20px" }}>
+          <a
+            style={{
+              textDecoration: "none",
+              padding: "0.5em",
+              borderRadius: "10px",
+              backgroundColor: "black",
+              color: "white"
+            }}
+            href={capturedData?.external_urls.spotify}
+            rel="noopener noreferrer"
+            target="_blank"
+          >{`Visit Your Spotify Profile`}</a>
+        </div>
       </div>
     </div>
   );

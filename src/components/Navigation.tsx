@@ -12,11 +12,12 @@ const style = {
     marginLeft: "250px",
     height: "30px",
     padding: "1em",
+    width: "calc(100%-250px)",
     backgroundColor: "#0f0f0f"
   } as React.CSSProperties,
   content: {
     padding: "2em",
-    marginLeft: "250px"
+    margin: "0 0 100px 250px"
   },
   sideBar: {
     width: "250px",

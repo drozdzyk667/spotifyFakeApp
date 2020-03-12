@@ -8,6 +8,7 @@ const style = {
     padding: "1em"
   } as React.CSSProperties,
   container: {
+    marginLeft: "50px",
     display: "flex",
     flexDirection: "row",
     flex: "2 1",

@@ -12,14 +12,16 @@ const style = {
     left: 0,
     bottom: 0,
     height: "100px",
-    backgroundColor: "gray",
+    backgroundColor: "#404040",
     width: "100vw"
   } as React.CSSProperties,
   spacer: {
-    margin: "0 1em 0 1em"
+    margin: "0 1em 0 1em",
+    color: "white"
   },
   spacerArtist: {
-    margin: "0 1em 0 1.6em"
+    margin: "0 1em 0 1.6em",
+    color: "white"
   },
   alignRight: {
     marginLeft: "auto"
@@ -44,7 +46,9 @@ const BottomBar: React.FC<BarProps> = ({ pickedSong, isAlbum }) => {
           {pickedSong.audio ? (
             <ReactPlayer url={pickedSong.audio} controls height={60} />
           ) : (
-            "We are truly sorry, We dont have DEMO recorded yet"
+            <span style={style.spacer}>
+              {"We are truly sorry, We dont have DEMO recorded yet"}
+            </span>
           )}
         </div>
       </div>

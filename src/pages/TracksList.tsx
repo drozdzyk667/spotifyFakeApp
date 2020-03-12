@@ -5,9 +5,12 @@ const style = {
   trackContainer: {
     display: "flex",
     flexDirection: "row",
-    padding: "1em"
+    padding: "1em",
+    marginLeft: "50px",
+    borderLeft: "2px solid black"
   } as React.CSSProperties,
   container: {
+    marginLeft: "50px",
     display: "flex",
     flexDirection: "row",
     flex: "2 1",
@@ -25,8 +28,16 @@ const TracksList = props => {
   const playlist = props.location.state.playlist;
   const tracks = props.location.state.tracks;
   const [pickedSong, setPickedSong] = React.useState();
+  const [activeTrack, setActiveTrack] = React.useState();
 
-  const handleSongPlay = (avatarURL, albumName, audioURL, artistName) => {
+  const handleSongPlay = (
+    trackID,
+    avatarURL,
+    albumName,
+    audioURL,
+    artistName
+  ) => {
+    setActiveTrack(trackID);
     setPickedSong({
       url: avatarURL,
       album_name: albumName,
@@ -47,6 +58,7 @@ const TracksList = props => {
               <div
                 onClick={() =>
                   handleSongPlay(
+                    item.track.id,
                     item.track.album.images[2].url,
                     item.track.album.name,
                     item.track.preview_url,
@@ -54,7 +66,11 @@ const TracksList = props => {
                   )
                 }
                 key={item.track.id}
-                style={style.trackContainer}
+                style={
+                  activeTrack === item.track.id
+                    ? { backgroundColor: "#ff4f6a", ...style.trackContainer }
+                    : { ...style.trackContainer }
+                }
               >
                 <img src={item.track.album.images[2].url} alt="track_avatar" />
                 <div>

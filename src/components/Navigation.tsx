@@ -1,55 +1,79 @@
 import React from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, NavLink } from "react-router-dom";
 import Routes from "./Routes";
 import Search from "./Search";
+import spotifyLogo from "../images/spotify_logo.png";
 
 const style = {
-  root: {
-    display: "flex",
-    flexDirection: "column"
-  } as React.CSSProperties,
   topBar: {
+    position: "sticky",
+    top: 0,
+    left: 0,
+    marginLeft: "250px",
     height: "30px",
     padding: "1em",
-    backgroundColor: "darkgreen"
-  },
-  contentAndSidebarContainer: {
-    display: "flex",
-    flexDirection: "row"
+    backgroundColor: "#0f0f0f"
   } as React.CSSProperties,
   content: {
-    margin: "2em"
+    padding: "2em",
+    marginLeft: "250px"
   },
   sideBar: {
-    minWidth: "150px",
-    borderRight: "2px solid black",
+    width: "250px",
+    position: "fixed",
+    height: "100%",
     display: "flex",
     flexDirection: "column",
-    padding: "1em",
-    fontSize: "1.5em"
+    fontSize: "1.2em",
+    backgroundColor: "black"
   } as React.CSSProperties,
+  linkText: {
+    color: "white",
+    padding: "0.5em"
+  },
   link: {
-    textDecoration: "none",
-    color: "black"
+    textDecoration: "none"
+  },
+  activeRoute: {
+    backgroundColor: "#414344"
+  },
+  align: {
+    padding: "1em",
+    paddingBottom: "2em"
   }
 };
 
-const Navigation: React.FC<{}> = () => {
+const Navigation = () => {
   return (
     <Router>
-      <div style={style.root}>
-        <div style={style.topBar}>
-          <Search />
+      <div>
+        <div style={style.sideBar}>
+          <img
+            style={style.align}
+            width={150}
+            height={45}
+            src={spotifyLogo}
+            alt="spotify_logo"
+          />
+          <NavLink
+            style={style.link}
+            activeStyle={style.activeRoute}
+            to="/categories"
+          >
+            <div style={style.linkText}>{"Categories"}</div>
+          </NavLink>
+          <NavLink
+            style={style.link}
+            activeStyle={style.activeRoute}
+            to="/new-releases"
+          >
+            <div style={style.linkText}>{"New Releases"}</div>
+          </NavLink>
         </div>
-        <div style={style.contentAndSidebarContainer}>
-          <menu style={style.sideBar}>
-            <Link style={style.link} to="/categories">
-              {"Categories"}
-            </Link>
-            <Link style={style.link} to="/new-releases">
-              {"New Releases"}
-            </Link>
-          </menu>
+        <div>
+          <div style={style.topBar}>
+            <Search />
+          </div>
           <main style={style.content}>
             <Routes />
           </main>

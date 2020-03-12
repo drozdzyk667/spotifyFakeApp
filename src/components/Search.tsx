@@ -5,9 +5,12 @@ import Avatar from "../images/user_avatar.png";
 const style = {
   avatar: {
     position: "absolute",
-    right: "1%",
-    top: "1%"
-  } as React.CSSProperties
+    right: "2%",
+    top: "10%"
+  } as React.CSSProperties,
+  cursor: {
+    cursor: "pointer"
+  }
 };
 
 const Search = () => {
@@ -60,14 +63,10 @@ const Search = () => {
         value={searchValue}
         onChange={handleSearch}
       />
-      <button
-        onClick={pushSearchData}
-        style={{ cursor: "pointer" }}
-        type="button"
-      >
+      <button onClick={pushSearchData} style={style.cursor} type="button">
         Search
       </button>
-      <Link style={{ cursor: "pointer" }} to="/user">
+      <Link style={style.cursor} to="/user">
         <img style={style.avatar} src={Avatar} width={50} alt="UserAvatar" />
       </Link>
     </form>

@@ -24,10 +24,17 @@ const style = {
   }
 };
 
+const initialSongState = {
+  url: "",
+  album_name: "",
+  audio: "",
+  artist_name: ""
+};
+
 const TracksList = props => {
   const playlist = props.location.state.playlist;
   const tracks = props.location.state.tracks;
-  const [pickedSong, setPickedSong] = React.useState();
+  const [pickedSong, setPickedSong] = React.useState(initialSongState);
   const [activeTrack, setActiveTrack] = React.useState();
 
   const handleSongPlay = (

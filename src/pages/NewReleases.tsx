@@ -21,12 +21,16 @@ const style = {
   }
 };
 
+interface Error {
+  [key: string]: string;
+}
+
 const NewReleases = () => {
   const history = useHistory();
   const newAlbumsURL = "https://api.spotify.com/v1/browse/new-releases";
-  const [resAlbums, setResAlbums] = React.useState();
+  const [resAlbums, setResAlbums] = React.useState<any[]>();
   const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState();
+  const [error, setError] = React.useState<Error>();
 
   const getAlbumTracks = async (albumID, album) => {
     await fetch(`https://api.spotify.com/v1/albums/${albumID}/tracks`, {

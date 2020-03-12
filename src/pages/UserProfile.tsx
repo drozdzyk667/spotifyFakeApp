@@ -12,10 +12,20 @@ const style = {
   }
 };
 
+interface FetchData {
+  email: string;
+  display_name: string;
+  images: [{ [key: string]: string }];
+}
+
+interface Error {
+  [key: string]: string;
+}
+
 const UserProfile = () => {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState();
-  const [capturedData, setCapturedData] = React.useState();
+  const [error, setError] = React.useState<Error>();
+  const [capturedData, setCapturedData] = React.useState<FetchData>();
   const USER_URL = "https://api.spotify.com/v1/me";
 
   const getUserInfo = async () => {
@@ -33,9 +43,7 @@ const UserProfile = () => {
         setCapturedData(data);
         setIsLoading(false);
       })
-      .catch(error => {
-        setError(error);
-      });
+      .catch(error => setError(error));
   };
 
   React.useEffect(() => {
@@ -43,7 +51,7 @@ const UserProfile = () => {
   }, []);
 
   if (error) {
-    return <p> {error?.message}</p>;
+    return <p> {error.message}</p>;
   }
 
   if (isLoading) {

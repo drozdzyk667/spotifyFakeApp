@@ -21,12 +21,16 @@ const style = {
   }
 };
 
+interface Error {
+  [key: string]: string;
+}
+
 const Categories = () => {
   const history = useHistory();
   const categoriesURL = "https://api.spotify.com/v1/browse/categories";
-  const [resCategories, setResCategories] = React.useState();
+  const [resCategories, setResCategories] = React.useState<any[]>();
   const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState();
+  const [error, setError] = React.useState<Error>();
 
   const getCategoryPlaylist = async categoryID => {
     await fetch(

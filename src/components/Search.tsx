@@ -5,7 +5,7 @@ import Avatar from "../images/user_avatar.png";
 const style = {
   avatar: {
     position: "absolute",
-    right: "2%",
+    right: "1%",
     top: "10%"
   } as React.CSSProperties,
   cursor: {
@@ -58,6 +58,7 @@ const Search = () => {
   return (
     <form>
       <input
+        style={{ marginLeft: "250px" }}
         type="text"
         onKeyPress={disableAppCrash}
         value={searchValue}

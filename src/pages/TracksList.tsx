@@ -6,14 +6,13 @@ const style = {
     display: "flex",
     flexDirection: "row",
     padding: "1em",
-    marginLeft: "50px",
+    marginLeft: "2vw",
     borderLeft: "2px solid black"
   } as React.CSSProperties,
   container: {
     marginLeft: "50px",
     display: "flex",
     flexDirection: "row",
-    flex: "2 1",
     cursor: "pointer"
   } as React.CSSProperties,
   spacer: {
@@ -21,6 +20,16 @@ const style = {
   },
   spacerArtist: {
     margin: "0 1em 0 1.6em"
+  },
+  imgContainer: { minWidth: "200px", width: "20%" },
+  img: {
+    position: "fixed",
+    minWidth: "inherit",
+    width: "15vw"
+  } as React.CSSProperties,
+  tracksContainer: {
+    width: "100%",
+    marginLeft: "5vw"
   }
 };
 
@@ -53,12 +62,16 @@ const TracksList = props => {
   return (
     <div>
       <div style={style.container}>
-        <div>
-          <img src={playlist.images[0].url} alt="album_avatar" />
+        <div style={style.imgContainer}>
+          <img
+            style={style.img}
+            src={playlist.images[0].url}
+            alt="album_avatar"
+          />
         </div>
-        <div>
+        <div style={style.tracksContainer}>
           {tracks &&
-            tracks.slice(0, 6).map(item => (
+            tracks.map(item => (
               <div
                 onClick={() =>
                   handleSongPlay(

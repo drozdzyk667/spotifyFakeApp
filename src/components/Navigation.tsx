@@ -9,10 +9,8 @@ const style = {
     position: "sticky",
     top: 0,
     left: 0,
-    marginLeft: "250px",
     height: "30px",
     padding: "1em",
-    width: "calc(100%-250px)",
     backgroundColor: "#0f0f0f"
   } as React.CSSProperties,
   content: {
@@ -20,6 +18,7 @@ const style = {
     margin: "0 0 100px 250px"
   },
   sideBar: {
+    zIndex: 1,
     width: "250px",
     position: "fixed",
     height: "100%",

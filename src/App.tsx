@@ -4,7 +4,7 @@ import { getLoginURL } from "./components/loginAuth";
 
 const App = () => {
   const [url, token, expire] = getLoginURL();
-  const expireTime = parseInt(expire) * 1000;
+  const expireTime = parseInt(expire) * 900;
 
   React.useEffect(() => {
     if (!token) {

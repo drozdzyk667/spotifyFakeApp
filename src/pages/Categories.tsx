@@ -88,7 +88,7 @@ const Categories = () => {
   }
 
   return (
-    <div>
+    <div data-testid="categories-container">
       {resCategories && (
         <div style={style.container}>
           {resCategories.map(category => (

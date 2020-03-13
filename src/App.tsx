@@ -1,21 +1,7 @@
-import React from "react";
-import Navigation from "./components/Navigation";
-import { getLoginURL } from "./components/loginAuth";
+import React from 'react';
+import Navigation from './components/Navigation';
 
 const App = () => {
-  const [url, token, expire] = getLoginURL();
-  const expireTime = parseInt(expire) * 900;
-
-  React.useEffect(() => {
-    if (!token) {
-      return window.location.assign(url);
-    } else {
-      setTimeout(() => {
-        window.location.assign(url);
-      }, expireTime);
-      localStorage.setItem("accessToken", token);
-    }
-  }, []);
   return <Navigation />;
 };
 

@@ -1,20 +1,20 @@
-import React from "react";
-import { useHistory, Link } from "react-router-dom";
-import Avatar from "../images/user_avatar.png";
+import React from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import Avatar from '../images/user_avatar.png';
 
 const style = {
   avatar: {
-    position: "absolute",
-    right: "1%",
-    top: "10%"
+    position: 'absolute',
+    right: '1%',
+    top: '10%',
   } as React.CSSProperties,
   cursor: {
-    cursor: "pointer"
-  }
+    cursor: 'pointer',
+  },
 };
 
 const Search = () => {
-  const [searchValue, setSearchValue] = React.useState("");
+  const [searchValue, setSearchValue] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,13 +25,13 @@ const Search = () => {
   const pushSearchData = async () => {
     setIsLoading(true);
     await fetch(
-      `https://api.spotify.com/v1/search?q=${searchValue}&type=artist`,
+      `https://api.spotify.com/v1/search?q=${searchValue}&type=artist,track`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken")
-        }
-      }
+          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+        },
+      },
     )
       .then(res => {
         return res.ok ? res.json() : null;
@@ -39,14 +39,18 @@ const Search = () => {
       .then(data => {
         history.push({
           pathname: `/search/${searchValue}`,
-          state: { details: data ? data.artists.items : [], isLoading }
+          state: {
+            artists: data.artists ? data.artists.items : [],
+            tracks: data.tracks ? data.tracks.items : [],
+            isLoading,
+          },
         });
         setIsLoading(false);
       })
       .catch(error => {
         console.warn(error);
       });
-    setSearchValue("");
+    setSearchValue('');
   };
 
   const disableAppCrash = event => {
@@ -58,7 +62,7 @@ const Search = () => {
   return (
     <form>
       <input
-        style={{ marginLeft: "250px" }}
+        style={{ marginLeft: '250px' }}
         type="text"
         onKeyPress={disableAppCrash}
         value={searchValue}

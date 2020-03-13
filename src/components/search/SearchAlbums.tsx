@@ -19,49 +19,41 @@ const style = {
     height: '450px',
     flexWrap: 'wrap',
   } as React.CSSProperties,
-  resultsTitle: { borderBottom: '2px solid black', paddingTop: '1em' },
-  bottomSpacer: { paddingBottom: '2em' },
+  spacer: { padding: '0.5em' },
 };
 
 interface PlaylistProps {
-  albums: any[];
+  value: any[];
 }
 
-const SearchAlbums: React.FC<PlaylistProps> = ({ albums }) => {
+const SearchAlbums: React.FC<PlaylistProps> = ({ value }) => {
   return (
-    <div>
-      {albums?.length > 0 ? (
-        <div style={style.bottomSpacer}>
-          <h3 style={style.resultsTitle}>{'Search results for Albums'}</h3>
-          <div style={style.container}>
-            {albums?.map(item => (
-              <div key={item.id}>
-                {item.images.length > 0 && (
-                  <div style={style.dataContainer}>
-                    <img
-                      width={320}
-                      height={320}
-                      src={item.images[1].url}
-                      alt="album_avatar"
-                    />
-                    <div style={{ padding: '0.5em' }}>
-                      <h3>{`Name: ${item.name}`}</h3>
-                      {item.artists.length > 0 ? (
-                        <p
-                          style={{
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                          }}
-                        >{`Main artist: ${item.artists[0].name}`}</p>
-                      ) : null}
-                    </div>
-                  </div>
-                )}
+    <div style={style.container}>
+      {value?.map(album => (
+        <div key={album.id}>
+          {album.images.length > 0 && (
+            <div style={style.dataContainer}>
+              <img
+                width={320}
+                height={320}
+                src={album.images[1].url}
+                alt="album_avatar"
+              />
+              <div style={style.spacer}>
+                <h3>{`Name: ${album.name}`}</h3>
+                {album.artists.length > 0 ? (
+                  <p
+                    style={{
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >{`Main artist: ${album.artists[0].name}`}</p>
+                ) : null}
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
-      ) : null}
+      ))}
     </div>
   );
 };

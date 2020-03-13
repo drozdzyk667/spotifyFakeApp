@@ -21,42 +21,36 @@ const style = {
   } as React.CSSProperties,
   resultsTitle: { borderBottom: '2px solid black', paddingTop: '1em' },
   bottomSpacer: { paddingBottom: '2em' },
+  spacer: { padding: '0.5em' },
 };
 
 interface ArtistsProps {
-  tracks: any[];
+  value: any[];
 }
 
-const SearchArtists: React.FC<ArtistsProps> = ({ tracks }) => {
+const SearchArtists: React.FC<ArtistsProps> = ({ value }) => {
   return (
-    <div>
-      {tracks?.length > 0 ? (
-        <div style={style.bottomSpacer}>
-          <h3 style={style.resultsTitle}>{'Search results for Tracks'}</h3>
-          <div style={style.container}>
-            {tracks?.map(item => (
-              <div key={item.id}>
-                {item.album.images.length > 0 && (
-                  <div style={style.dataContainer}>
-                    <img
-                      width={320}
-                      height={320}
-                      src={item.album.images[1].url}
-                      alt="track_avatar"
-                    />
-                    <div style={{ padding: '0.5em' }}>
-                      <h3>{`Name: ${item.name}`}</h3>
-                      {item.artists.length > 0 ? (
-                        <p>{`Main artist: ${item.artists[0].name}`}</p>
-                      ) : null}
-                    </div>
-                  </div>
-                )}
+    <div style={style.container}>
+      {value?.map(track => (
+        <div key={track.id}>
+          {track.album.images.length > 0 && (
+            <div style={style.dataContainer}>
+              <img
+                width={320}
+                height={320}
+                src={track.album.images[1].url}
+                alt="track_avatar"
+              />
+              <div style={style.spacer}>
+                <h3>{`Name: ${track.name}`}</h3>
+                {track.artists.length > 0 ? (
+                  <p>{`Main artist: ${track.artists[0].name}`}</p>
+                ) : null}
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
-      ) : null}
+      ))}
     </div>
   );
 };

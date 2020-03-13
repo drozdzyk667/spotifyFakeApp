@@ -1,34 +1,40 @@
 import React from 'react';
-import SearchArtists from '../components/search/SearchArtists';
-import SearchTracks from '../components/search/SearchTracks';
-import SearchPlaylists from '../components/search/SearchPlaylists';
-import SearchAlbums from '../components/search/SearchAlbums';
+import SearchSingleData from '../components/search/SearchSingleData';
+
+const style = {
+  resultsTitle: { borderBottom: '2px solid black', paddingTop: '1em' },
+  bottomSpacer: { paddingBottom: '2em' },
+};
 
 const SearchContent = props => {
-  const albums = props.location.state.albums;
-  const playlists = props.location.state.playlists;
-  const artists = props.location.state?.artists;
-  const tracks = props.location.state?.tracks;
+  const searchValues = props.location.state.data;
   const isLoading = props.location.state?.isLoading;
 
   if (isLoading) {
     return <p> {'Loading data...'}</p>;
   }
 
-  const checkValidate = () => {
-    return !!([...albums, ...playlists, ...artists, ...tracks].length > 0);
-  };
+  const hasData = searchValues.every(item => {
+    return !!(item.data.length > 0);
+  });
 
-  if (!checkValidate()) {
+  if (!hasData) {
     return <p>{'Please provide valid data...'}</p>;
   }
 
   return (
     <div>
-      <SearchAlbums albums={albums} />
-      <SearchArtists artists={artists} />
-      <SearchPlaylists playlists={playlists} />
-      <SearchTracks tracks={tracks} />
+      {searchValues.map(element =>
+        element.data.length !== 0 ? (
+          <div key={element.name} style={style.bottomSpacer}>
+            <h3
+              style={style.resultsTitle}
+            >{`Search results for ${element.name.charAt(0).toUpperCase() +
+              element.name.slice(1)}`}</h3>
+            <SearchSingleData name={element.name} value={element.data} />
+          </div>
+        ) : null,
+      )}
     </div>
   );
 };

@@ -21,39 +21,33 @@ const style = {
   } as React.CSSProperties,
   resultsTitle: { borderBottom: '2px solid black', paddingTop: '1em' },
   bottomSpacer: { paddingBottom: '2em' },
+  spacer: { padding: '0.5em' },
 };
 
 interface PlaylistProps {
-  playlists: any[];
+  value: any[];
 }
 
-const SearchPlaylists: React.FC<PlaylistProps> = ({ playlists }) => {
+const SearchPlaylists: React.FC<PlaylistProps> = ({ value }) => {
   return (
-    <div>
-      {playlists?.length > 0 ? (
-        <div style={style.bottomSpacer}>
-          <h3 style={style.resultsTitle}>{'Search results for Playlists'}</h3>
-          <div style={style.container}>
-            {playlists?.map(playlist => (
-              <div key={playlist.id}>
-                {playlist.images.length >= 2 && (
-                  <div style={style.dataContainer}>
-                    <img
-                      width={320}
-                      height={320}
-                      src={playlist.images[1].url}
-                      alt="playlist_avatar"
-                    />
-                    <div style={{ padding: '0.5em' }}>
-                      <h3>{`Name: ${playlist.name}`}</h3>
-                    </div>
-                  </div>
-                )}
+    <div style={style.container}>
+      {value?.map(playlist => (
+        <div key={playlist.id}>
+          {playlist.images.length >= 2 && (
+            <div style={style.dataContainer}>
+              <img
+                width={320}
+                height={320}
+                src={playlist.images[1].url}
+                alt="playlist_avatar"
+              />
+              <div style={style.spacer}>
+                <h3>{`Name: ${playlist.name}`}</h3>
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
-      ) : null}
+      ))}
     </div>
   );
 };

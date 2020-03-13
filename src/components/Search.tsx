@@ -40,10 +40,12 @@ const Search = () => {
         history.push({
           pathname: `/search/${searchValue}`,
           state: {
-            albums: data.albums.items ?? [],
-            playlists: data.playlists.items ?? [],
-            artists: data.artists.items ?? [],
-            tracks: data.tracks.items ?? [],
+            data: [
+              { name: 'albums', data: data.albums.items ?? [] },
+              { name: 'playlists', data: data.playlists.items ?? [] },
+              { name: 'artists', data: data.artists.items ?? [] },
+              { name: 'tracks', data: data.tracks.items ?? [] },
+            ],
             isLoading,
           },
         });

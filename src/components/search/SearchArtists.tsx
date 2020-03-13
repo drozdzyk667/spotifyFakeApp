@@ -21,47 +21,36 @@ const style = {
   } as React.CSSProperties,
   resultsTitle: { borderBottom: '2px solid black', paddingTop: '1em' },
   bottomSpacer: { paddingBottom: '2em' },
+  spacer: { padding: '0.5em' },
 };
 
 interface ArtistsProps {
-  artists: any[];
+  value: any[];
 }
 
-const SearchArtists: React.FC<ArtistsProps> = ({ artists }) => {
+const SearchArtists: React.FC<ArtistsProps> = ({ value }) => {
   return (
-    <div>
-      {artists?.length > 0 ? (
-        <div style={style.bottomSpacer}>
-          <h3 style={style.resultsTitle}>{'Search results for Artists'}</h3>
-          <div style={style.container}>
-            {artists?.map(artist => (
-              <div key={artist.id}>
-                {artist.images.length > 0 && (
-                  <div style={style.dataContainer}>
-                    <img
-                      width={320}
-                      height={320}
-                      src={artist.images[1].url}
-                      alt="artist_avatar"
-                    />
-                    <div style={{ padding: '0.5em' }}>
-                      <h3>{`Name: ${artist.name}`}</h3>
-                      {artist.genres.length > 0 ? (
-                        <p
-                          style={{
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                          }}
-                        >{`Genre: ${artist.genres[0]}`}</p>
-                      ) : null}
-                    </div>
-                  </div>
-                )}
+    <div style={style.container}>
+      {value?.map(artist => (
+        <div key={artist.id}>
+          {artist.images.length > 0 && (
+            <div style={style.dataContainer}>
+              <img
+                width={320}
+                height={320}
+                src={artist.images[1].url}
+                alt="artist_avatar"
+              />
+              <div style={style.spacer}>
+                <h3>{`Name: ${artist.name}`}</h3>
+                {artist.genres.length > 0 ? (
+                  <p>{`Genre: ${artist.genres[0]}`}</p>
+                ) : null}
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
-      ) : null}
+      ))}
     </div>
   );
 };

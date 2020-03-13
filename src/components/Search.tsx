@@ -25,7 +25,7 @@ const Search = () => {
   const pushSearchData = async () => {
     setIsLoading(true);
     await fetch(
-      `https://api.spotify.com/v1/search?q=${searchValue}&type=artist,track`,
+      `https://api.spotify.com/v1/search?q=${searchValue}&type=artist,track,album,playlist`,
       {
         method: 'GET',
         headers: {
@@ -40,8 +40,10 @@ const Search = () => {
         history.push({
           pathname: `/search/${searchValue}`,
           state: {
-            artists: data.artists ? data.artists.items : [],
-            tracks: data.tracks ? data.tracks.items : [],
+            albums: data.albums.items ?? [],
+            playlists: data.playlists.items ?? [],
+            artists: data.artists.items ?? [],
+            tracks: data.tracks.items ?? [],
             isLoading,
           },
         });

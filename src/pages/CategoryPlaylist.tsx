@@ -1,5 +1,6 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Route } from "react-router-dom";
+import Trackslist from "../pages/TracksList";
 
 const style = {
   container: {
@@ -17,9 +18,8 @@ const style = {
 };
 
 const CategoryPlaylist = props => {
-  const playlists = props.location.state.playlists;
-  const categoryId = props.location.state.id;
-  const playlistError = props.location.state.playlistError;
+  const playlists = props.location.state?.playlists;
+  const categoryId = props.location.state?.id;
 
   const history = useHistory();
 
@@ -47,11 +47,11 @@ const CategoryPlaylist = props => {
 
   return (
     <div>
-      {playlistError || playlists.length === 0 ? (
+      {playlists?.length === 0 ? (
         "Sorry We do not have any data to display!"
       ) : (
         <div style={style.container}>
-          {playlists.map(playlist => (
+          {playlists?.map(playlist => (
             <div key={playlist.id}>
               <div
                 onClick={() =>
@@ -66,6 +66,11 @@ const CategoryPlaylist = props => {
           ))}
         </div>
       )}
+      <Route
+        exact
+        path="/categories/:category/:tracks"
+        component={Trackslist}
+      />
     </div>
   );
 };

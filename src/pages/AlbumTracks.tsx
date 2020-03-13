@@ -42,8 +42,8 @@ interface PickedSong {
 }
 
 const AlbumTracks = props => {
-  const newTracks = props.location.state.data;
-  const album = props.location.state.album;
+  const newTracks = props.location.state?.data;
+  const album = props.location.state?.album;
   const [pickedSong, setPickedSong] = React.useState<PickedSong>();
   const [activeTrack, setActiveTrack] = React.useState();
 
@@ -67,11 +67,15 @@ const AlbumTracks = props => {
     <div>
       <div style={style.container}>
         <div style={style.imgContainer}>
-          <img style={style.img} src={album.images[0].url} alt="album_avatar" />
+          <img
+            style={style.img}
+            src={album?.images[0].url}
+            alt="album_avatar"
+          />
         </div>
         <div style={style.tracksContainer}>
           {newTracks &&
-            newTracks.map(item => (
+            newTracks?.map(item => (
               <div
                 onClick={() =>
                   handleSongPlay(

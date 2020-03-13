@@ -31,7 +31,6 @@ const Categories = () => {
   const [resCategories, setResCategories] = React.useState<any[]>();
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<Error>();
-  const [playlistError, setPlaylistError] = React.useState<Error>();
 
   const getCategoryPlaylist = async categoryID => {
     await fetch(
@@ -49,14 +48,11 @@ const Categories = () => {
           pathname: `/categories/${categoryID}`,
           state: {
             id: categoryID,
-            playlists: data.playlists.items,
-            playlistError
+            playlists: data.playlists.items
           }
         });
       })
-      .catch(error => {
-        setPlaylistError(error);
-      });
+      .catch(error => console.warn(error));
   };
 
   const getCategories = async () => {

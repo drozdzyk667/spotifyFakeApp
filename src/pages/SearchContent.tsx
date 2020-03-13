@@ -22,8 +22,8 @@ const style = {
 };
 
 const SearchContent = props => {
-  const artists = props.location.state.details;
-  const isLoading = props.location.state.isLoading;
+  const artists = props.location.state?.details;
+  const isLoading = props.location.state?.isLoading;
 
   if (isLoading) {
     return <p> {"Loading data..."}</p>;
@@ -31,8 +31,8 @@ const SearchContent = props => {
 
   return (
     <div style={style.container}>
-      {artists.length > 0
-        ? artists.map(artist => (
+      {artists?.length > 0
+        ? artists?.map(artist => (
             <div key={artist.id}>
               {artist.images.length > 0 && (
                 <div style={style.dataContainer}>

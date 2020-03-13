@@ -19,6 +19,8 @@ const style = {
 const CategoryPlaylist = props => {
   const playlists = props.location.state.playlists;
   const categoryId = props.location.state.id;
+  const playlistError = props.location.state.playlistError;
+
   const history = useHistory();
 
   const handleCategoryPlaylist = async (tracksURL, playlist) => {
@@ -45,7 +47,7 @@ const CategoryPlaylist = props => {
 
   return (
     <div>
-      {playlists.length === 0 ? (
+      {playlistError || playlists.length === 0 ? (
         "Sorry We do not have any data to display!"
       ) : (
         <div style={style.container}>

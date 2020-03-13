@@ -89,7 +89,6 @@ const AlbumTracks = props => {
                     : { ...style.trackContainer }
                 }
               >
-                {console.log(item)}
                 <div style={style.trackText}>
                   <h1>{`${item.track_number}.`}</h1>
                   <h2 style={style.spacer}>{item.name}</h2>

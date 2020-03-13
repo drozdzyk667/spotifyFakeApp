@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, NavLink } from "react-router-dom";
 import Routes from "./Routes";
 import Search from "./Search";
+import ScrollToTop from "./ScrollTop";
 import spotifyLogo from "../images/spotify_logo.png";
 
 const style = {
@@ -46,6 +47,7 @@ const style = {
 const Navigation = () => {
   return (
     <Router>
+      <ScrollToTop />
       <div>
         <div style={style.sideBar}>
           <img

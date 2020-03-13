@@ -71,31 +71,41 @@ const TracksList = props => {
         </div>
         <div style={style.tracksContainer}>
           {tracks &&
-            tracks.map(item => (
-              <div
-                onClick={() =>
-                  handleSongPlay(
-                    item.track.id,
-                    item.track.album.images[2].url,
-                    item.track.album.name,
-                    item.track.preview_url,
-                    item.track.artists[0].name
-                  )
-                }
-                key={item.track.id}
-                style={
-                  activeTrack === item.track.id
-                    ? { backgroundColor: "#ff4f6a", ...style.trackContainer }
-                    : { ...style.trackContainer }
-                }
-              >
-                <img src={item.track.album.images[2].url} alt="track_avatar" />
-                <div>
-                  <h2 style={style.spacer}>{item.track.album.name}</h2>
-                  <p style={style.spacerArtist}>{item.track.artists[0].name}</p>
+            tracks.map(item =>
+              item.track ? (
+                <div
+                  key={item.track.id}
+                  onClick={() =>
+                    handleSongPlay(
+                      item.track.id,
+                      item.track.album.images[2].url,
+                      item.track.album.name,
+                      item.track.preview_url,
+                      item.track.artists[0].name
+                    )
+                  }
+                  style={
+                    activeTrack === item.track.id
+                      ? {
+                          backgroundColor: "#ff4f6a",
+                          ...style.trackContainer
+                        }
+                      : { ...style.trackContainer }
+                  }
+                >
+                  <img
+                    src={item.track.album.images[2].url}
+                    alt="track_avatar"
+                  />
+                  <div>
+                    <h2 style={style.spacer}>{item.track.album.name}</h2>
+                    <p style={style.spacerArtist}>
+                      {item.track.artists[0].name}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ) : null
+            )}
         </div>
       </div>
       {pickedSong && <BottomBar pickedSong={pickedSong} />}

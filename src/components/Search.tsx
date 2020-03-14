@@ -30,9 +30,9 @@ const style = {
 };
 
 const Search = () => {
-  const [searchValue, setSearchValue] = React.useState('');
-  const [isLoading, setIsLoading] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [searchValue, setSearchValue] = React.useState('');
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);

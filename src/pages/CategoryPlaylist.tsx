@@ -18,10 +18,9 @@ const style = {
 };
 
 const CategoryPlaylist = props => {
-  const playlists = props.location.state?.playlists;
-  const categoryId = props.location.state?.id;
-
   const history = useHistory();
+  const categoryId = props.location.state?.id;
+  const playlists = props.location.state?.playlists;
 
   const handleCategoryPlaylist = async (tracksURL, playlist) => {
     await fetch(tracksURL, {

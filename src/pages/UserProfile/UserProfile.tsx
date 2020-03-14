@@ -36,6 +36,7 @@ interface FetchData {
   images: [{ [key: string]: string }];
   external_urls: { spotify: string };
   type: string;
+  followers: { [key: string]: number };
 }
 
 interface Error {
@@ -46,6 +47,7 @@ const UserProfile = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<Error>();
   const [capturedData, setCapturedData] = React.useState<FetchData>();
+  const MIN_FOLLOWERS = 0;
   const USER_URL = 'https://api.spotify.com/v1/me';
 
   const getUserInfo = async () => {
@@ -101,9 +103,14 @@ const UserProfile = () => {
             {`User email: ${capturedData?.email ??
               "You haven't provided any :("}`}
           </h4>
-
+          <b>{`Followers: ${
+            capturedData?.followers.total === MIN_FOLLOWERS
+              ? 'You have 0, Come on!'
+              : capturedData?.followers.total
+          }`}</b>
           <div style={style.buttonPadding}>
             <a
+              data-testid="userProfile-button"
               style={style.spotifyButton}
               href={capturedData?.external_urls.spotify}
               rel="noopener noreferrer"

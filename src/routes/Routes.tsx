@@ -6,18 +6,17 @@ import NotFoundPage from '../pages/404';
 import SearchContent from '../pages/SearchContent';
 import CategoryPlaylist from '../pages/CategoryPlaylist';
 import Trackslist from '../pages/TracksList';
-import UserProfile from '../pages/UserProfile';
+import UserProfile from '../pages/UserProfile/UserProfile';
 import AlbumTracks from '../pages/AlbumTracks';
 import { getLoginURL } from '../components/loginAuth';
-import { useHistory } from 'react-router-dom';
 
 const Routes = () => {
   const [url, token, expire] = getLoginURL();
   const expireTime = parseInt(expire) * 900;
-  const history = useHistory();
 
   React.useEffect(() => {
     if (!token) {
+      window.location.reload();
       return window.location.assign(url);
     } else {
       setTimeout(() => {
@@ -25,9 +24,6 @@ const Routes = () => {
         window.location.reload();
       }, expireTime);
       localStorage.setItem('accessToken', token);
-      history.push({
-        pathname: '/categories',
-      });
     }
   }, []);
 

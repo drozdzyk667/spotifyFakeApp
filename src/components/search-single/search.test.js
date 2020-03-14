@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import SearchSingleData from '../components/SearchSingleData';
+import SearchSingleData from './SearchSingleData';
 
 describe('Search Logic', () => {
   const name = 'playlists';
@@ -20,6 +20,7 @@ describe('Search Logic', () => {
 
   it('check return components', () => {
     expect(wrapper.children).toHaveLength(1);
-    expect(wrapper.find(<div />));
+    expect(wrapper.find(<div />)).toMatchSnapshot();
+    wrapper.unmount();
   });
 });

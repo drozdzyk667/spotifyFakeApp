@@ -1,5 +1,5 @@
 import React from 'react';
-import BottomBar from '../components/BottomBar';
+import BottomBar from '../components/bottom-bar/BottomBar';
 const Fade = require('react-reveal/Fade');
 
 const style = {
@@ -16,9 +16,6 @@ const style = {
   spacer: {
     margin: '0 1em 0 1em',
   } as React.CSSProperties,
-  spacerArtist: {
-    margin: '0 1em 0 1.6em',
-  },
   trackText: {
     marginLeft: '2em',
     display: 'flex',
@@ -43,10 +40,10 @@ interface PickedSong {
 }
 
 const AlbumTracks = props => {
-  const newTracks = props.location.state?.data;
-  const album = props.location.state?.album;
-  const [pickedSong, setPickedSong] = React.useState<PickedSong>();
   const [activeTrack, setActiveTrack] = React.useState();
+  const [pickedSong, setPickedSong] = React.useState<PickedSong>();
+  const album = props.location.state?.album;
+  const newTracks = props.location.state?.data;
 
   const handleSongPlay = (
     trackID,

@@ -11,11 +11,6 @@ const style = {
     flexWrap: 'wrap',
     justifyContent: 'center',
   } as React.CSSProperties,
-  title: {
-    color: 'white',
-    paddingLeft: '1em',
-    fontSize: '1.5em',
-  },
   singleContainer: {
     width: '300px',
     height: '300px',
@@ -35,7 +30,7 @@ interface Error {
 
 const NewReleases = () => {
   const history = useHistory();
-  const newAlbumsURL = 'https://api.spotify.com/v1/browse/new-releases';
+  const NEW_ALBUMS_URI = 'https://api.spotify.com/v1/browse/new-releases';
   const [resAlbums, setResAlbums] = React.useState<any[]>();
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<Error>();
@@ -64,7 +59,7 @@ const NewReleases = () => {
 
   const getNewAlbums = async () => {
     setIsLoading(true);
-    await fetch(newAlbumsURL, {
+    await fetch(NEW_ALBUMS_URI, {
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('accessToken'),

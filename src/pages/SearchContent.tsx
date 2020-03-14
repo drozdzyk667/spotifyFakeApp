@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import SearchSingleData from '../components/SearchSingleData';
+import SearchSingleData from '../components/search-single/SearchSingleData';
 const Fade = require('react-reveal/Fade');
 
 const style = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import BottomBar from '../components/BottomBar';
+import BottomBar from '../components/bottom-bar/BottomBar';
 const Fade = require('react-reveal/Fade');
 
 const style = {

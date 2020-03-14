@@ -35,10 +35,10 @@ interface Error {
 
 const Categories = () => {
   const history = useHistory();
-  const categoriesURL = 'https://api.spotify.com/v1/browse/categories';
-  const [resCategories, setResCategories] = React.useState<any[]>();
-  const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<Error>();
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [resCategories, setResCategories] = React.useState<any[]>();
+  const CATEGORIES_URI = 'https://api.spotify.com/v1/browse/categories';
 
   const getCategoryPlaylist = async categoryID => {
     await fetch(
@@ -65,7 +65,7 @@ const Categories = () => {
 
   const getCategories = async () => {
     setIsLoading(true);
-    await fetch(categoriesURL, {
+    await fetch(CATEGORIES_URI, {
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('accessToken'),

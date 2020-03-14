@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+const Zoom = require('react-reveal/Zoom');
 
 const style = {
   container: {
@@ -91,14 +92,15 @@ const NewReleases = () => {
       {resAlbums ? (
         <div style={style.container}>
           {resAlbums.map(album => (
-            <div
-              key={album.id}
-              onClick={() => getAlbumTracks(album.id, album)}
-              style={{
-                backgroundImage: `url(${album.images[1].url})`,
-                ...style.singleContainer,
-              }}
-            ></div>
+            <Zoom key={album.id}>
+              <div
+                onClick={() => getAlbumTracks(album.id, album)}
+                style={{
+                  backgroundImage: `url(${album.images[1].url})`,
+                  ...style.singleContainer,
+                }}
+              ></div>
+            </Zoom>
           ))}
         </div>
       ) : null}

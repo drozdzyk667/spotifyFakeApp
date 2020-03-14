@@ -1,40 +1,41 @@
-import React from "react";
-import BottomBar from "../components/BottomBar";
+import React from 'react';
+import BottomBar from '../components/BottomBar';
+const Fade = require('react-reveal/Fade');
 
 const style = {
   trackContainer: {
-    display: "flex",
-    flexDirection: "row"
+    display: 'flex',
+    flexDirection: 'row',
   } as React.CSSProperties,
   container: {
-    marginLeft: "50px",
-    display: "flex",
-    flexDirection: "row",
-    cursor: "pointer"
+    marginLeft: '50px',
+    display: 'flex',
+    flexDirection: 'row',
+    cursor: 'pointer',
   } as React.CSSProperties,
   spacer: {
-    margin: "0 1em 0 1em"
+    margin: '0 1em 0 1em',
   } as React.CSSProperties,
   spacerArtist: {
-    margin: "0 1em 0 1.6em"
+    margin: '0 1em 0 1.6em',
   },
   trackText: {
-    marginLeft: "2em",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center"
+    marginLeft: '2em',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   } as React.CSSProperties,
-  imgContainer: { minWidth: "250px", width: "50%" },
+  imgContainer: { minWidth: '250px', width: '50%' },
   img: {
-    position: "fixed",
-    minWidth: "inherit",
-    width: "25vw"
+    position: 'fixed',
+    minWidth: 'inherit',
+    width: '25vw',
   } as React.CSSProperties,
   tracksContainer: {
-    width: "100%",
-    marginLeft: "5vw",
-    borderLeft: "2px solid black"
-  }
+    width: '100%',
+    marginLeft: '5vw',
+    borderLeft: '2px solid black',
+  },
 };
 
 interface PickedSong {
@@ -52,14 +53,14 @@ const AlbumTracks = props => {
     trackNumber,
     albumName,
     audioURL,
-    artistName
+    artistName,
   ) => {
     setActiveTrack(trackID);
     setPickedSong({
       url: trackNumber,
       album_name: albumName,
       audio: audioURL,
-      artist_name: artistName
+      artist_name: artistName,
     });
   };
 
@@ -67,15 +68,17 @@ const AlbumTracks = props => {
     <div>
       <div style={style.container}>
         <div style={style.imgContainer}>
-          <img
-            style={style.img}
-            src={album?.images[0].url}
-            alt="album_avatar"
-          />
+          <Fade top>
+            <img
+              style={style.img}
+              src={album?.images[0].url}
+              alt="album_avatar"
+            />
+          </Fade>
         </div>
         <div style={style.tracksContainer}>
           {newTracks &&
-            newTracks?.map(item => (
+            newTracks?.map((item, index) => (
               <div
                 onClick={() =>
                   handleSongPlay(
@@ -83,13 +86,13 @@ const AlbumTracks = props => {
                     item.track_number,
                     item.name,
                     item.preview_url,
-                    item.artists[0].name
+                    item.artists[0].name,
                   )
                 }
                 key={item.id}
                 style={
                   activeTrack === item.id
-                    ? { backgroundColor: "#ff4f6a", ...style.trackContainer }
+                    ? { backgroundColor: '#ff4f6a', ...style.trackContainer }
                     : { ...style.trackContainer }
                 }
               >

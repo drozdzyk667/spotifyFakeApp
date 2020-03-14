@@ -1,24 +1,24 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 const style = {
   container: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center"
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   } as React.CSSProperties,
   title: {
-    color: "white",
-    paddingLeft: "1em",
-    fontSize: "1.5em"
+    color: 'white',
+    paddingLeft: '1em',
+    fontSize: '1.5em',
   },
   singleContainer: {
-    width: "275px",
-    height: "275px",
-    margin: "0.5em",
-    cursor: "pointer"
-  }
+    width: '275px',
+    height: '275px',
+    margin: '0.5em',
+    cursor: 'pointer',
+  },
 };
 
 interface Error {
@@ -27,7 +27,7 @@ interface Error {
 
 const Categories = () => {
   const history = useHistory();
-  const categoriesURL = "https://api.spotify.com/v1/browse/categories";
+  const categoriesURL = 'https://api.spotify.com/v1/browse/categories';
   const [resCategories, setResCategories] = React.useState<any[]>();
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<Error>();
@@ -36,11 +36,11 @@ const Categories = () => {
     await fetch(
       `https://api.spotify.com/v1/browse/categories/${categoryID}/playlists`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken")
-        }
-      }
+          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+        },
+      },
     )
       .then(response => response.json())
       .then(data => {
@@ -48,8 +48,8 @@ const Categories = () => {
           pathname: `/categories/${categoryID}`,
           state: {
             id: categoryID,
-            playlists: data.playlists.items
-          }
+            playlists: data.playlists.items,
+          },
         });
       })
       .catch(error => console.warn(error));
@@ -58,10 +58,10 @@ const Categories = () => {
   const getCategories = async () => {
     setIsLoading(true);
     await fetch(categoriesURL, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("accessToken")
-      }
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      },
     })
       .then(res => {
         return res.ok ? res.json() : null;
@@ -84,7 +84,7 @@ const Categories = () => {
   }
 
   if (isLoading) {
-    return <p> {"Loading categories..."}</p>;
+    return <p> {'Loading categories...'}</p>;
   }
 
   return (
@@ -97,7 +97,7 @@ const Categories = () => {
               onClick={() => getCategoryPlaylist(category.id)}
               style={{
                 backgroundImage: `url(${category.icons[0].url})`,
-                ...style.singleContainer
+                ...style.singleContainer,
               }}
             >
               <h3 style={style.title}>{category.name}</h3>

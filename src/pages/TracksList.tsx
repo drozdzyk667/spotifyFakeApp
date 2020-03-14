@@ -1,36 +1,37 @@
-import React from "react";
-import BottomBar from "../components/BottomBar";
+import React from 'react';
+import BottomBar from '../components/BottomBar';
+const Fade = require('react-reveal/Fade');
 
 const style = {
   trackContainer: {
-    display: "flex",
-    flexDirection: "row",
-    padding: "1em",
-    marginLeft: "2vw",
-    borderLeft: "2px solid black"
+    display: 'flex',
+    flexDirection: 'row',
+    padding: '1em',
+    marginLeft: '2vw',
+    borderLeft: '2px solid black',
   } as React.CSSProperties,
   container: {
-    marginLeft: "50px",
-    display: "flex",
-    flexDirection: "row",
-    cursor: "pointer"
+    marginLeft: '50px',
+    display: 'flex',
+    flexDirection: 'row',
+    cursor: 'pointer',
   } as React.CSSProperties,
   spacer: {
-    margin: "0 1em 0 1em"
+    margin: '0 1em 0 1em',
   },
   spacerArtist: {
-    margin: "0 1em 0 1.6em"
+    margin: '0 1em 0 1.6em',
   },
-  imgContainer: { minWidth: "200px", width: "20%" },
+  imgContainer: { minWidth: '200px', width: '20%' },
   img: {
-    position: "fixed",
-    minWidth: "inherit",
-    width: "15vw"
+    position: 'fixed',
+    minWidth: 'inherit',
+    width: '15vw',
   } as React.CSSProperties,
   tracksContainer: {
-    width: "100%",
-    marginLeft: "5vw"
-  }
+    width: '100%',
+    marginLeft: '5vw',
+  },
 };
 
 interface PickedSong {
@@ -48,14 +49,14 @@ const TracksList = props => {
     avatarURL,
     albumName,
     audioURL,
-    artistName
+    artistName,
   ) => {
     setActiveTrack(trackID);
     setPickedSong({
       url: avatarURL,
       album_name: albumName,
       audio: audioURL,
-      artist_name: artistName
+      artist_name: artistName,
     });
   };
 
@@ -63,11 +64,13 @@ const TracksList = props => {
     <div>
       <div style={style.container}>
         <div style={style.imgContainer}>
-          <img
-            style={style.img}
-            src={playlist?.images[0].url}
-            alt="album_avatar"
-          />
+          <Fade left>
+            <img
+              style={style.img}
+              src={playlist?.images[0].url}
+              alt="album_avatar"
+            />
+          </Fade>
         </div>
         <div style={style.tracksContainer}>
           {tracks &&
@@ -81,14 +84,14 @@ const TracksList = props => {
                       item.track.album.images[2].url,
                       item.track.album.name,
                       item.track.preview_url,
-                      item.track.artists[0].name
+                      item.track.artists[0].name,
                     )
                   }
                   style={
                     activeTrack === item.track.id
                       ? {
-                          backgroundColor: "#ff4f6a",
-                          ...style.trackContainer
+                          backgroundColor: '#ff4f6a',
+                          ...style.trackContainer,
                         }
                       : { ...style.trackContainer }
                   }
@@ -104,7 +107,7 @@ const TracksList = props => {
                     </p>
                   </div>
                 </div>
-              ) : null
+              ) : null,
             )}
         </div>
       </div>

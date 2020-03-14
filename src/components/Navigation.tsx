@@ -10,6 +10,7 @@ const style = {
     position: 'sticky',
     top: 0,
     left: 0,
+    zIndex: 1,
     height: '30px',
     padding: '1em',
     backgroundColor: '#0f0f0f',
@@ -19,7 +20,7 @@ const style = {
     margin: '0 0 100px 250px',
   },
   sideBar: {
-    zIndex: 1,
+    zIndex: 2,
     width: '250px',
     position: 'fixed',
     height: '100%',

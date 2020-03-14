@@ -1,20 +1,20 @@
-import React from "react";
-import { useHistory, Route } from "react-router-dom";
-import Trackslist from "../pages/TracksList";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+const Zoom = require('react-reveal/Zoom');
 
 const style = {
   container: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center"
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   } as React.CSSProperties,
   singleContainer: {
-    width: "275px",
-    height: "275px",
-    margin: "0.5em",
-    cursor: "pointer"
-  }
+    width: '275px',
+    height: '275px',
+    margin: '0.5em',
+    cursor: 'pointer',
+  },
 };
 
 const CategoryPlaylist = props => {
@@ -25,10 +25,10 @@ const CategoryPlaylist = props => {
 
   const handleCategoryPlaylist = async (tracksURL, playlist) => {
     await fetch(tracksURL, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("accessToken")
-      }
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      },
     })
       .then(response => response.json())
       .then(data => {
@@ -36,41 +36,36 @@ const CategoryPlaylist = props => {
           pathname: `/categories/${categoryId}/${playlist.id}`,
           state: {
             tracks: data.items,
-            playlist
-          }
+            playlist,
+          },
         });
       })
       .catch(error => {
-        console.error("Error:", error);
+        console.error('Error:', error);
       });
   };
 
   return (
     <div>
       {playlists?.length === 0 ? (
-        "Sorry We do not have any data to display!"
+        'Sorry We do not have any data to display!'
       ) : (
         <div style={style.container}>
           {playlists?.map(playlist => (
-            <div key={playlist.id}>
+            <Zoom key={playlist.id}>
               <div
                 onClick={() =>
                   handleCategoryPlaylist(playlist.tracks.href, playlist)
                 }
                 style={{
                   backgroundImage: `url(${playlist.images[0].url})`,
-                  ...style.singleContainer
+                  ...style.singleContainer,
                 }}
               ></div>
-            </div>
+            </Zoom>
           ))}
         </div>
       )}
-      <Route
-        exact
-        path="/categories/:category/:tracks"
-        component={Trackslist}
-      />
     </div>
   );
 };

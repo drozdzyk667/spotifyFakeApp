@@ -1,5 +1,8 @@
 import React from 'react';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 const Zoom = require('react-reveal/Zoom');
+const Fade = require('react-reveal/Fade');
 
 const style = {
   container: {
@@ -11,6 +14,20 @@ const style = {
   spacer: {
     margin: '2em',
   },
+  spotifyButton: {
+    textDecoration: 'none',
+    padding: '0.5em',
+    borderRadius: '10px',
+    backgroundColor: 'black',
+    color: 'white',
+  },
+  buttonPadding: { paddingTop: '20px' },
+  avatarImg: { borderRadius: '50%' },
+  loader: {
+    position: 'absolute',
+    left: '50%',
+    top: '30%',
+  } as React.CSSProperties,
 };
 
 interface FetchData {
@@ -58,42 +75,44 @@ const UserProfile = () => {
   }
 
   if (isLoading) {
-    return <p> {'Loading User data...'}</p>;
+    return (
+      <div style={style.loader}>
+        <Loader type="Audio" color="black" height={100} width={100} />
+        <p>{'Loading User data...'}</p>
+      </div>
+    );
   }
 
   return (
-    <div style={style.container}>
-      {capturedData?.images[0]?.url ? (
-        <Zoom>
-          <img
-            style={{ borderRadius: '50%' }}
-            src={capturedData.images[0].url}
-            alt="user_photo"
-          />
-        </Zoom>
-      ) : null}
-      <div style={style.spacer}>
-        <h1>{`Hey ${capturedData?.display_name}, you have ${capturedData?.type} rights !`}</h1>
-        <h4>
-          {`User email: ${capturedData?.email ??
-            "You haven't provided any :("}`}
-        </h4>
-        <div style={{ paddingTop: '20px' }}>
-          <a
-            style={{
-              textDecoration: 'none',
-              padding: '0.5em',
-              borderRadius: '10px',
-              backgroundColor: 'black',
-              color: 'white',
-            }}
-            href={capturedData?.external_urls.spotify}
-            rel="noopener noreferrer"
-            target="_blank"
-          >{`Visit Your Spotify Profile`}</a>
+    <Fade>
+      <div style={style.container}>
+        {capturedData?.images[0]?.url ? (
+          <Zoom delay={200}>
+            <img
+              style={style.avatarImg}
+              src={capturedData.images[0].url}
+              alt="user_photo"
+            />
+          </Zoom>
+        ) : null}
+        <div style={style.spacer}>
+          <h1>{`Hey ${capturedData?.display_name}, you have ${capturedData?.type} rights !`}</h1>
+          <h4>
+            {`User email: ${capturedData?.email ??
+              "You haven't provided any :("}`}
+          </h4>
+
+          <div style={style.buttonPadding}>
+            <a
+              style={style.spotifyButton}
+              href={capturedData?.external_urls.spotify}
+              rel="noopener noreferrer"
+              target="_blank"
+            >{`Visit Your Spotify Profile`}</a>
+          </div>
         </div>
       </div>
-    </div>
+    </Fade>
   );
 };
 

@@ -43,7 +43,7 @@ const Routes = () => {
       />
       <Route exact path="/new-releases" component={NewReleases} />
       <Route exact path="/new-releases/:album" component={AlbumTracks} />
-      <Route exact path="/search/:key" component={SearchContent} />
+      <Route exact path="/search" component={SearchContent} />
       <Route exact path="/user" component={UserProfile} />
       <Route path="*" component={NotFoundPage} />
     </Switch>

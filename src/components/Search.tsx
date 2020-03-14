@@ -55,7 +55,7 @@ const Search = () => {
       })
       .then(data => {
         history.push({
-          pathname: `/search/${searchValue}`,
+          pathname: `/search`,
           state: {
             data: [
               { name: 'albums', data: data.albums.items ?? [] },

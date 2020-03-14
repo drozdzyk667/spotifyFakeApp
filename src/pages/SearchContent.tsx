@@ -1,9 +1,12 @@
 import React from 'react';
-import SearchSingleData from '../components/SearchSingleData';
 import Select from 'react-select';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import SearchSingleData from '../components/SearchSingleData';
 const Fade = require('react-reveal/Fade');
 
 const style = {
+  rootData: { marginLeft: '150px', overflow: 'hidden' } as React.CSSProperties,
   container: {
     display: 'flex',
     flexDirection: 'row',
@@ -24,6 +27,11 @@ const style = {
   } as React.CSSProperties,
   resultsTitle: { borderBottom: '2px solid black', paddingTop: '1em' },
   bottomSpacer: { paddingBottom: '2em' },
+  loader: {
+    position: 'absolute',
+    left: '50%',
+    top: '30%',
+  } as React.CSSProperties,
 };
 
 const customStyles = {
@@ -36,6 +44,10 @@ const customStyles = {
   menu: styles => ({
     ...styles,
     width: '120px',
+  }),
+  container: styles => ({
+    ...styles,
+    position: 'fixed',
   }),
 };
 
@@ -57,7 +69,12 @@ const SearchContent = props => {
   const [filtered, setFiltered] = React.useState<Filtered>(options[0]);
 
   if (isLoading) {
-    return <p> {'Loading data...'}</p>;
+    return (
+      <div style={style.loader}>
+        <Loader type="Audio" color="black" height={100} width={100} />
+        <p> {'Loading data...'}</p>
+      </div>
+    );
   }
 
   const hasData = searchValues.every(item => {
@@ -70,6 +87,7 @@ const SearchContent = props => {
 
   const handleFilter = selectedOption => {
     setFiltered(selectedOption);
+    window.scrollTo(0, 0);
   };
 
   const filteredData =
@@ -88,40 +106,42 @@ const SearchContent = props => {
         options={options}
         components={{ IndicatorSeparator: () => null }}
       />
-      {filteredData.map(
-        element =>
-          element.data && (
-            <div key={element.name} style={style.bottomSpacer}>
-              <h3
-                style={style.resultsTitle}
-              >{`Search results for ${element.name.charAt(0).toUpperCase() +
-                element.name.slice(1)}`}</h3>
-              <div style={style.container}>
-                {element.data?.map(item => (
-                  <Fade bottom key={item.id}>
-                    {(item.images
-                      ? item.images.length >= 2
-                      : item.album.images.length >= 2) && (
-                      <div style={style.dataContainer}>
-                        <img
-                          width={320}
-                          height={320}
-                          src={
-                            item.album
-                              ? item.album.images[1].url
-                              : item.images[1].url
-                          }
-                          alt="avatar"
-                        />
-                        <SearchSingleData value={item} name={element.name} />
-                      </div>
-                    )}
-                  </Fade>
-                ))}
+      <div style={style.rootData}>
+        {filteredData.map(
+          element =>
+            element.data && (
+              <div key={element.name} style={style.bottomSpacer}>
+                <h3
+                  style={style.resultsTitle}
+                >{`Search results for ${element.name.charAt(0).toUpperCase() +
+                  element.name.slice(1)}`}</h3>
+                <div style={style.container}>
+                  {element.data?.map(item => (
+                    <Fade bottom key={item.id}>
+                      {(item.images
+                        ? item.images.length >= 2
+                        : item.album.images.length >= 2) && (
+                        <div style={style.dataContainer}>
+                          <img
+                            width={320}
+                            height={320}
+                            src={
+                              item.album
+                                ? item.album.images[1].url
+                                : item.images[1].url
+                            }
+                            alt="avatar"
+                          />
+                          <SearchSingleData value={item} name={element.name} />
+                        </div>
+                      )}
+                    </Fade>
+                  ))}
+                </div>
               </div>
-            </div>
-          ),
-      )}
+            ),
+        )}
+      </div>
     </div>
   );
 };

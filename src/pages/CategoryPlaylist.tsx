@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-const Zoom = require('react-reveal/Zoom');
+const Fade = require('react-reveal/Fade');
 
 const style = {
   container: {
@@ -52,7 +52,7 @@ const CategoryPlaylist = props => {
       ) : (
         <div style={style.container}>
           {playlists?.map(playlist => (
-            <Zoom key={playlist.id}>
+            <Fade key={playlist.id}>
               <div
                 onClick={() =>
                   handleCategoryPlaylist(playlist.tracks.href, playlist)
@@ -62,7 +62,7 @@ const CategoryPlaylist = props => {
                   ...style.singleContainer,
                 }}
               ></div>
-            </Zoom>
+            </Fade>
           ))}
         </div>
       )}

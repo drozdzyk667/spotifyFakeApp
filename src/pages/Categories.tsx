@@ -1,5 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+const Zoom = require('react-reveal/Zoom');
 
 const style = {
   container: {
@@ -19,6 +22,11 @@ const style = {
     margin: '0.5em',
     cursor: 'pointer',
   },
+  loader: {
+    position: 'absolute',
+    left: '50%',
+    top: '30%',
+  } as React.CSSProperties,
 };
 
 interface Error {
@@ -84,7 +92,12 @@ const Categories = () => {
   }
 
   if (isLoading) {
-    return <p> {'Loading categories...'}</p>;
+    return (
+      <div style={style.loader}>
+        <Loader type="Audio" color="black" height={100} width={100} />
+        <p> {'Loading categories...'}</p>
+      </div>
+    );
   }
 
   return (
@@ -92,16 +105,17 @@ const Categories = () => {
       {resCategories && (
         <div style={style.container}>
           {resCategories.map(category => (
-            <div
-              key={category.id}
-              onClick={() => getCategoryPlaylist(category.id)}
-              style={{
-                backgroundImage: `url(${category.icons[0].url})`,
-                ...style.singleContainer,
-              }}
-            >
-              <h3 style={style.title}>{category.name}</h3>
-            </div>
+            <Zoom key={category.id}>
+              <div
+                onClick={() => getCategoryPlaylist(category.id)}
+                style={{
+                  backgroundImage: `url(${category.icons[0].url})`,
+                  ...style.singleContainer,
+                }}
+              >
+                <h3 style={style.title}>{category.name}</h3>
+              </div>
+            </Zoom>
           ))}
         </div>
       )}

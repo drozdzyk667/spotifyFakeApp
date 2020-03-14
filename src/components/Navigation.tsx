@@ -51,13 +51,19 @@ const Navigation = () => {
       <ScrollToTop />
       <div>
         <div style={style.sideBar}>
-          <img
-            style={style.align}
-            width={150}
-            height={45}
-            src={spotifyLogo}
-            alt="spotify_logo"
-          />
+          <a
+            href="https://www.spotify.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              style={style.align}
+              width={150}
+              height={45}
+              src={spotifyLogo}
+              alt="spotify_logo"
+            />
+          </a>
           <NavLink
             style={style.link}
             activeStyle={style.activeRoute}

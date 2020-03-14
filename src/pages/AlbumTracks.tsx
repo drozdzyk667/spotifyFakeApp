@@ -97,7 +97,7 @@ const AlbumTracks = props => {
                 }
               >
                 <div style={style.trackText}>
-                  <h1>{`${item.track_number}.`}</h1>
+                  <h1>{`${index + 1}.`}</h1>
                   <h2 style={style.spacer}>{item.name}</h2>
                 </div>
               </div>

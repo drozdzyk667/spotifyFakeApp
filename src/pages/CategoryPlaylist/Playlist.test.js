@@ -1,5 +1,5 @@
-import React from "react";
-import { mount } from "enzyme";
+import React from 'react';
+import { mount } from 'enzyme';
 
 const FakeCategoryPlaylist = props => {
   const playlists = props.location.state?.playlists;
@@ -27,34 +27,35 @@ const FakeCategoryPlaylist = props => {
   );
 };
 
-describe("<CategoryPlaylist />", () => {
+describe('<CategoryPlaylist />', () => {
   const location = {
     state: {
-      playlists: [{ id: "123", name: "Test", images: [{ url: "test_image" }] }]
-    }
+      playlists: [{ id: '123', name: 'Test', images: [{ url: 'test_image' }] }],
+    },
   };
   const wrapper = mount(<FakeCategoryPlaylist location={location} />);
 
-  it("find <div /> with data-testid", () => {
-    expect(wrapper.find("div").findWhere(d => d.prop("data-testid") === 1));
+  it('find <div /> with data-testid', () => {
+    expect(wrapper.find('div').findWhere(d => d.prop('data-testid') === 1));
   });
 
-  it("check playlist name", () => {
+  it('check playlist name', () => {
     expect(
       wrapper
-        .find("h3")
+        .find('h3')
         .render()
-        .text()
-    ).toEqual("Test");
+        .text(),
+    ).toEqual('Test');
   });
 
-  it("Test click event", () => {
+  it('Test click event', () => {
     const wrapper = mount(<FakeCategoryPlaylist location={location} />);
     expect(
       wrapper
-        .find("div")
+        .find('div')
         .at(2)
-        .simulate("click", true)
-    );
+        .simulate('click', true),
+    ).toMatchSnapshot();
+    wrapper.unmount();
   });
 });

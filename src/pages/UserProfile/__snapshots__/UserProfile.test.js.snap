@@ -1,24 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`External spotify button click should open external spotify user account page 1`] = `
-<a
-  data-testid="userProfile-button"
-  rel="noopener noreferrer"
-  style={
-    Object {
-      "backgroundColor": "black",
-      "borderRadius": "10px",
-      "color": "white",
-      "padding": "0.5em",
-      "textDecoration": "none",
-    }
-  }
-  target="_blank"
->
-  Visit Your Spotify Profile
-</a>
-`;
-
 exports[`User Profile button click should open external spotify user account page 1`] = `"Visit Your Spotify Profile"`;
 
 exports[`User Profile button click should open external spotify user account page 2`] = `

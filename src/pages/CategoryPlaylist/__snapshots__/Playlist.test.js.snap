@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CategoryPlaylist /> Test click event 1`] = `
+<div
+  data-testid="test_image"
+  key="123"
+  onClick={[Function]}
+>
+  <h3>
+    Test
+  </h3>
+</div>
+`;

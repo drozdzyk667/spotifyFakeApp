@@ -107,6 +107,7 @@ const Categories = () => {
           {resCategories.map(category => (
             <Zoom key={category.id}>
               <div
+                data-testid="category-link"
                 onClick={() => getCategoryPlaylist(category.id)}
                 style={{
                   backgroundImage: `url(${category.icons[0].url})`,

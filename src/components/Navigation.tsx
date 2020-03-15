@@ -67,16 +67,16 @@ const Navigation = () => {
           <NavLink
             style={style.link}
             activeStyle={style.activeRoute}
-            to="/categories"
+            to="/new-releases"
           >
-            <div style={style.linkText}>{'Categories'}</div>
+            <div style={style.linkText}>{'New Releases'}</div>
           </NavLink>
           <NavLink
             style={style.link}
             activeStyle={style.activeRoute}
-            to="/new-releases"
+            to="/categories"
           >
-            <div style={style.linkText}>{'New Releases'}</div>
+            <div style={style.linkText}>{'Categories'}</div>
           </NavLink>
         </div>
         <div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import Avatar from '../images/user_avatar.png';
-import SearchIcon from '../images/search_icon.png';
+import Avatar from '../assets/user_avatar.png';
+import SearchIcon from '../assets/search_icon.png';
 const Fade = require('react-reveal/Fade');
 
 const style = {

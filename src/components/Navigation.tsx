@@ -3,7 +3,7 @@ import { BrowserRouter as Router, NavLink } from 'react-router-dom';
 import Routes from '../routes/Routes';
 import Search from './Search';
 import ScrollToTop from './ScrollTop';
-import spotifyLogo from '../images/spotify_logo.png';
+import spotifyLogo from '../assets/spotify_logo.png';
 
 const style = {
   topBar: {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 const Zoom = require('react-reveal/Zoom');
@@ -50,9 +50,9 @@ const UserProfile = () => {
   const MIN_FOLLOWERS = 0;
   const USER_URL = 'https://api.spotify.com/v1/me';
 
-  const getUserInfo = async () => {
+  const getUserInfo = useCallback(() => {
     setIsLoading(true);
-    await fetch(USER_URL, {
+    fetch(USER_URL, {
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
@@ -66,11 +66,11 @@ const UserProfile = () => {
         setIsLoading(false);
       })
       .catch(error => setError(error));
-  };
+  }, []);
 
   React.useEffect(() => {
     getUserInfo();
-  }, []);
+  }, [getUserInfo]);
 
   if (error) {
     return <p> {error.message}</p>;

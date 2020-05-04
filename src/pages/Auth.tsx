@@ -1,5 +1,5 @@
 import React from 'react';
-import { getLoginURL } from '../components/loginAuth';
+import { getAuthData } from '../helpers/loginAuth';
 import { Button, Box, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 
 const AuthPage = () => {
   const classes = useStyles();
-  const [url, token] = getLoginURL();
+  const [url, token] = getAuthData();
 
   if (token) {
     localStorage.setItem('accessToken', token);

@@ -1,4 +1,4 @@
-export const getLoginURL = () => {
+export const getAuthData = () => {
   const CLIENT_ID = '136b2ccf7edd4a6b9fe04e9641e18405';
   const REDIRECT_URI = 'http://localhost:3000/categories';
   let expireTime = '';

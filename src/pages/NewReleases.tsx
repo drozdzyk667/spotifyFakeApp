@@ -35,29 +35,32 @@ const NewReleases = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<Error>();
 
-  const getAlbumTracks = async (albumID, album) => {
-    await fetch(`https://api.spotify.com/v1/albums/${albumID}/tracks`, {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        history.push({
-          pathname: `/new-releases/${albumID}`,
-          state: {
-            data: data.items,
-            album,
-          },
-        });
+  const getAlbumTracks = React.useCallback(
+    async (albumID, album) => {
+      await fetch(`https://api.spotify.com/v1/albums/${albumID}/tracks`, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+        },
       })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  };
+        .then(response => response.json())
+        .then(data => {
+          history.push({
+            pathname: `/new-releases/${albumID}`,
+            state: {
+              data: data.items,
+              album,
+            },
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    },
+    [history],
+  );
 
-  const getNewAlbums = async () => {
+  const getNewAlbums = React.useCallback(async () => {
     setIsLoading(true);
     await fetch(NEW_ALBUMS_URI, {
       method: 'GET',
@@ -75,11 +78,11 @@ const NewReleases = () => {
       .catch(error => {
         setError(error);
       });
-  };
+  }, []);
 
   React.useEffect(() => {
     getNewAlbums();
-  }, []);
+  }, [getNewAlbums]);
 
   if (error) {
     return <p> {error.message}</p>;

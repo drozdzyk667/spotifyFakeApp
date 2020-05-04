@@ -22,27 +22,30 @@ const CategoryPlaylist = props => {
   const categoryId = props.location.state?.id;
   const playlists = props.location.state?.playlists;
 
-  const handleCategoryPlaylist = async (tracksURL, playlist) => {
-    await fetch(tracksURL, {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        history.push({
-          pathname: `/categories/${categoryId}/${playlist.id}`,
-          state: {
-            tracks: data.items,
-            playlist,
-          },
-        });
+  const handleFetchCategoryPlaylist = React.useCallback(
+    async (tracksURL, playlist) => {
+      await fetch(tracksURL, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+        },
       })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  };
+        .then(response => response.json())
+        .then(data => {
+          history.push({
+            pathname: `/categories/${categoryId}/${playlist.id}`,
+            state: {
+              tracks: data.items,
+              playlist,
+            },
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    },
+    [categoryId, history],
+  );
 
   return (
     <div>
@@ -54,7 +57,7 @@ const CategoryPlaylist = props => {
             <Fade key={playlist.id}>
               <div
                 onClick={() =>
-                  handleCategoryPlaylist(playlist.tracks.href, playlist)
+                  handleFetchCategoryPlaylist(playlist.tracks.href, playlist)
                 }
                 style={{
                   backgroundImage: `url(${playlist.images[0].url})`,

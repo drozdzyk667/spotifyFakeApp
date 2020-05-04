@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Routes from '../routes/Routes';
 import Search from './Search';
-import ScrollToTop from './ScrollTop';
 import spotifyLogo from '../assets/spotify_logo.png';
 
 const style = {
@@ -48,7 +47,6 @@ const style = {
 const Navigation = () => {
   return (
     <>
-      <ScrollToTop />
       <div>
         <div style={style.sideBar}>
           <a

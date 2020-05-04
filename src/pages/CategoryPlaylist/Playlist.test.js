@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 const FakeCategoryPlaylist = props => {
   const playlists = props.location.state?.playlists;
 
-  const handleCategoryPlaylist = () => {
+  const handleFetchCategoryPlaylist = () => {
     return true;
   };
 
@@ -15,7 +15,7 @@ const FakeCategoryPlaylist = props => {
           {playlists.map(playlist => (
             <div
               key={playlist.id}
-              onClick={() => handleCategoryPlaylist()}
+              onClick={() => handleFetchCategoryPlaylist()}
               data-testid={playlist.images[0].url}
             >
               <h3>{playlist.name}</h3>

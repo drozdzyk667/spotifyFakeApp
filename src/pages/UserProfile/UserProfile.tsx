@@ -30,7 +30,7 @@ const style = {
   } as React.CSSProperties,
 };
 
-interface FetchData {
+interface FetchUserData {
   email: string;
   display_name: string;
   images: [{ [key: string]: string }];
@@ -46,7 +46,7 @@ interface Error {
 const UserProfile = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<Error>();
-  const [capturedData, setCapturedData] = React.useState<FetchData>();
+  const [userPofileData, setUserPofileData] = React.useState<FetchUserData>();
   const MIN_FOLLOWERS = 0;
   const USER_URL = 'https://api.spotify.com/v1/me';
 
@@ -62,7 +62,7 @@ const UserProfile = () => {
         return res.ok ? res.json() : null;
       })
       .then(data => {
-        setCapturedData(data);
+        setUserPofileData(data);
         setIsLoading(false);
       })
       .catch(error => setError(error));
@@ -88,31 +88,31 @@ const UserProfile = () => {
   return (
     <Fade>
       <div style={style.container}>
-        {capturedData?.images[0]?.url ? (
+        {userPofileData?.images[0]?.url ? (
           <Zoom delay={200}>
             <img
               style={style.avatarImg}
-              src={capturedData.images[0].url}
+              src={userPofileData.images[0].url}
               alt="user_photo"
             />
           </Zoom>
         ) : null}
         <div style={style.spacer}>
-          <h1>{`Hey ${capturedData?.display_name}, you have ${capturedData?.type} rights !`}</h1>
+          <h1>{`Hey ${userPofileData?.display_name}, you have ${userPofileData?.type} rights !`}</h1>
           <h4>
-            {`User email: ${capturedData?.email ??
+            {`User email: ${userPofileData?.email ??
               "You haven't provided any :("}`}
           </h4>
           <b>{`Followers: ${
-            capturedData?.followers.total === MIN_FOLLOWERS
+            userPofileData?.followers.total === MIN_FOLLOWERS
               ? 'You have 0, Come on!'
-              : capturedData?.followers.total
+              : userPofileData?.followers.total
           }`}</b>
           <div style={style.buttonPadding}>
             <a
               data-testid="userProfile-button"
               style={style.spotifyButton}
-              href={capturedData?.external_urls.spotify}
+              href={userPofileData?.external_urls.spotify}
               rel="noopener noreferrer"
               target="_blank"
             >{`Visit Your Spotify Profile`}</a>

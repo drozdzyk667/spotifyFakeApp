@@ -63,7 +63,7 @@ const Categories = () => {
       .catch(error => console.warn(error));
   };
 
-  const getCategories = async () => {
+  const getCategories = React.useCallback(async () => {
     setIsLoading(true);
     await fetch(CATEGORIES_URI, {
       method: 'GET',
@@ -81,11 +81,11 @@ const Categories = () => {
       .catch(error => {
         setError(error);
       });
-  };
+  }, []);
 
   React.useEffect(() => {
     getCategories();
-  }, []);
+  }, [getCategories]);
 
   if (error) {
     return <p> {error.message}</p>;

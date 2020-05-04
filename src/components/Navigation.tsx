@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Routes from '../routes/Routes';
 import Search from './Search';
 import ScrollToTop from './ScrollTop';
@@ -47,7 +47,7 @@ const style = {
 
 const Navigation = () => {
   return (
-    <Router>
+    <>
       <ScrollToTop />
       <div>
         <div style={style.sideBar}>
@@ -88,7 +88,7 @@ const Navigation = () => {
           </main>
         </div>
       </div>
-    </Router>
+    </>
   );
 };
 

@@ -74,7 +74,7 @@ const Search = () => {
     setSearchValue('');
   };
 
-  const preventDefaultBehaviour = event => {
+  const handleEnterKeyOnSearch = event => {
     if (event.which === 13) {
       event.preventDefault();
       if (searchValue) {
@@ -106,7 +106,7 @@ const Search = () => {
             <input
               style={style.input}
               type="text"
-              onKeyPress={preventDefaultBehaviour}
+              onKeyPress={handleEnterKeyOnSearch}
               value={searchValue}
               onChange={handleSearch}
             />

@@ -1,5 +1,5 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 const ScrollToTop = ({ history }) => {
   React.useEffect(() => {
@@ -9,7 +9,7 @@ const ScrollToTop = ({ history }) => {
     return () => {
       unlisten();
     };
-  }, []);
+  }, [history]);
 
   return null;
 };

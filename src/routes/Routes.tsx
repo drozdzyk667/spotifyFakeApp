@@ -8,27 +8,8 @@ import CategoryPlaylist from '../pages/CategoryPlaylist/CategoryPlaylist';
 import Trackslist from '../pages/TracksList';
 import UserProfile from '../pages/UserProfile/UserProfile';
 import AlbumTracks from '../pages/AlbumTracks';
-import { getLoginURL } from '../components/loginAuth';
-import { useHistory } from 'react-router-dom';
 
 const Routes = () => {
-  const history = useHistory();
-  const [url, token, expire] = getLoginURL();
-  const expireTime = parseInt(expire) * 900;
-
-  React.useEffect(() => {
-    if (!token) {
-      return window.location.assign(url);
-    } else {
-      setTimeout(() => {
-        window.location.assign(url);
-        window.location.reload();
-      }, expireTime);
-      localStorage.setItem('accessToken', token);
-      history.push({ pathname: '/new-releases' });
-    }
-  }, []);
-
   return (
     <Switch>
       <Route exact path="/" />

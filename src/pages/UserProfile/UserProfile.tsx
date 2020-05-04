@@ -50,9 +50,9 @@ const UserProfile = () => {
   const MIN_FOLLOWERS = 0;
   const USER_URL = 'https://api.spotify.com/v1/me';
 
-  const getUserInfo = useCallback(() => {
+  const getUserInfo = useCallback(async () => {
     setIsLoading(true);
-    fetch(USER_URL, {
+    await fetch(USER_URL, {
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
